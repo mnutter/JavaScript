@@ -1,3 +1,3 @@
 JavaScript
 ==========
-The purpose of this repository to put in all of my JavaScript code.
+The purpose of this repository is to put in all of my JavaScript code.
