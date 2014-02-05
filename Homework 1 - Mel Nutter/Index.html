@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mel Nutter - Syntax Exercises</title>
+    <script src="syntax.js"></script>
+</head>
+
+<body>
+<h1>Mel Nutter - Syntax Exercises</h1>
+=== Start of addEM ===
+<p>Test 1 :  addEM(4,6)</p>
+<script>
+    addEM(4,6);
+</script>
+
+<p>Test 2 :  addEM("4",10)</p>
+<script>
+    addEM("4",10);
+</script>
+
+<p>Test 3 : addEM("Hello","There")</p>
+<script>
+    addEM("Hello","There");
+</script>
+
+<p>=== Start of bigThree ===</p>
+<script>
+    var largestValue;
+    var _undefined;
+
+    document.write('bigThree(4,1,9)<br>');
+    largestValue = bigThree(4,1,9);
+    document.write(largestValue + '<br>');
+
+    document.write('bigThree(22,47,8)<br>');
+    largestValue = bigThree(22,47,8);
+    document.write(largestValue + '<br>');
+
+    document.write('bigThree(100,99,98)<br>');
+    largestValue = bigThree(100,99,98);
+    document.write(largestValue + '<br>');
+
+    document.write('bigThree(\'c\',\'q\',\'z\')<br>');
+    largestValue = bigThree('c','q','z');
+    document.write(largestValue + '<br>');
+
+    document.write('bigThree([\'cat\'],_undefined,null)<br>');
+    largestValue = bigThree(['cat'],_undefined,null);
+    document.write(largestValue + '<br>');
+</script>
+
+<p>=== Start of arraySwap ===</p>
+<script>
+    var array1 = ['cat','dog','bird'];
+    var array2 = ['monkey','elephant','rhino'];
+
+    document.write(array1 + '<br>');
+    document.write(array2 + '<br>');
+
+    document.write('<br>Swap first elements in array<br><br>');
+    arraySwap(array1, array2);
+
+    document.write(array1 + '<br>');
+    document.write(array2 + '<br>');
+
+</script>
+
+<p>=== Start of loop ===</p>
+<script>
+    loopIt();
+</script>
+
+
+<p>=== Start of calcGrade ===</p>
+<script>
+    var sGrade;
+
+    sGrade = calcGrade();
+    document.write("The grade is " + sGrade);
+
+    sGrade = null;
+</script>
+<p>=== Start of enumObject ===</p>
+
+<script>
+    enumObject();
+</script>
+<noscript>
+    Either your browser does not support JavaScript or it is currently disabled.
+</noscript>
+
+</body>
+</html>
