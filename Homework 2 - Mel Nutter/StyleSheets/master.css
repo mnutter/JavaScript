@@ -1,0 +1,14 @@
+body
+{
+    background-color:#B2FFB2;
+}
+.error {
+    font-weight: bold;
+    color: red;
+    font-style: italic;
+}
+legend{
+    font-size: medium;
+    font-weight: bold;
+    color: darkgreen;
+}
