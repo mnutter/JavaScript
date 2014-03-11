@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework 3 (jQuery) - Mel Nutter</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+#timer {
+height: 50px;
+width: 500px;
+font-size: xx-large;
+position: absolute;
+top: 50px; left: 400px;
+}
+
+#carFacingRight {
+position:absolute;
+left:200px;
+top:199px;
+width:150px;
+height:100px;
+z-index:1;
+}
+#boom{
+position: absolute;
+left: 675px;
+top: 200px;
+width:200px;
+height:100px;
+display: none;
+z-index: 2
+}
+#carFacingLeft {
+position:absolute;
+left:1200px;
+top:200px;
+width:150px;
+height:100px;
+z-index:1;
+}
+
+</style>
+<script>
+    var CAR = {};  // Wrapper Object
+
+    CAR.move = function () {
+
+        //Perform a custom animation of a set of CSS properties.
+        //Move the car right to 625px in 4000 milliseconds
+        $( "#carFacingRight" ).animate({
+            left: "625px"
+        }, 4000 , function () {
+
+            //Hide the cars, set the explosion
+            //and disable the reset button when
+            //the animate completes.
+            $("#carFacingRight").hide();
+            $("#carFacingLeft").hide();
+            $("#boom").show();
+            $("#resetbtn").attr("disabled",false);
+
+        });
+
+        //Move the car left to 758px in 4000 milliseconds
+        //No complete function
+        $( "#carFacingLeft" ).animate({
+            left: "758px"
+        }, 4000 );
+
+    }
+
+
+    CAR.startGame = function () {
+
+        //Disable the start button
+        $("#startbtn").attr("disabled",true);
+
+        //Count down and start the game
+        setTimeout("$('#timer').html('Starting the game in 5')",1000);
+        setTimeout("$('#timer').html('Starting the game in 4')",2000);
+        setTimeout("$('#timer').html('Starting the game in 3')",3000);
+        setTimeout("$('#timer').html('Starting the game in 2')",4000);
+        setTimeout("$('#timer').html('Starting the game in 1')",5000);
+        setTimeout("$('#timer').html('Starting the game in 0')",6000);
+        setTimeout("$('#timer').html('Go!');CAR.move()",7000);
+
+    }
+
+
+    CAR.resetGame = function () {
+
+        //Reset the game
+        //Hide the explosion, reset the cars to original position
+        $("#boom").hide();
+        $("#carFacingRight").css("left",200).show();
+        $("#carFacingLeft").css("left",1200).show();
+
+        //Set the timer to a space
+        $("#timer").html("&nbsp;");
+
+        //Reset the button to their original styles
+        $("#resetbtn").attr("disabled",true);
+        $("#startbtn").attr("disabled",false);
+
+    }
+
+    $(document).ready(function () {
+
+        //When the DOM is fully loaded
+        //Set the click events for the buttons
+        $("#startbtn").click(CAR.startGame);
+        $("#resetbtn").click(CAR.resetGame);
+
+    });
+
+</script>
+
+<form id="carform" name="carform" action="index.html" method="Get">
+    <button type="button" id="startbtn" name="startbtn">Start</button>
+    <button type="button" id="resetbtn" name="resetbtn" disabled>Reset</button >
+    <br>
+    <div id="timer">&nbsp;</div>
+    <br>
+
+    <div id="carFacingRight">
+        <img src="CarFacingRight.jpg" id="carFacingRightjpg" alt="car facing right" >
+    </div>
+    <div id="boom">
+        <img src="boom.jpg" id="boomjpg" alt="boom" height="100" width="150">
+    </div>
+
+    <div id="carFacingLeft">
+        <img src="CarFacingLeft.jpg"  id="carFacingLeftjpg" alt="car facing left" >
+    </div>
+</form>
+</body>
+</html>
