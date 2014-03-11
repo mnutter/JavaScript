@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Homework 3 - Mel Nutter</title>
+    <script src="car.js"></script>
+</head>
+<body>
+<style>
+
+    #timer {
+        height: 50px;
+        width: 500px;
+        font-size: xx-large;
+        position: absolute;
+        top: 50px; left: 400px;
+    }
+
+
+    #carFacingRight {
+        position:absolute;
+        left:200px;
+        top:199px;
+        width:150px;
+        height:100px;
+        z-index:1;
+    }
+    #boom{
+        position: absolute;
+        left: 675px;
+        top: 200px;
+        width:200px;
+        height:100px;
+        visibility: hidden;
+        z-index: 2
+    }
+    #carFacingLeft {
+        position:absolute;
+        left:1200px;
+        top:200px;
+        width:150px;
+        height:100px;
+        z-index:1;
+    }
+
+</style>
+
+<script>
+    /* set animation speed and step */
+    var step = 3;
+    var framespeed = 35;
+
+
+    /* set animation boundaries */
+    var maxleft = 758;
+    var maxright = 625 ;
+    var moveLeft;
+    var moveRight;
+
+    /* return the x-coordinate of the layer named layername */
+    function getX(layerName)
+    {
+       return(parseInt(getStyle(layerName, "left"),10));
+    }
+
+    /* set the x-coordinate of layer named layerName */
+    function setX(layerName, x)
+    {
+        var theLayer = document.getElementById(layerName);
+        theLayer.style.left=x+"px";
+    }
+
+    function getStyle(layerName, styleName)
+    {
+        /* abstraction to address varying browser methods to calculate a style value */
+        var style = "";
+        var obj = document.getElementById(layerName);
+        if (obj.style[styleName])
+            style = obj.style[styleName];
+        else if (obj.currentStyle)
+            style = obj.currentStyle[styleName];
+        else if (window.getComputedStyle)
+        {
+            var computedStyle = window.getComputedStyle(obj, "");
+            style = computedStyle.getPropertyValue(styleName);
+        }
+        return style;
+    }
+
+    /* move left until boundary */
+    function left()
+    {
+        var currentX = getX('carFacingLeft');
+
+        if (currentX > maxleft)
+        {
+            currentX-=step;
+            setX('carFacingLeft',currentX);
+            moveLeft=setTimeout(left,(1000/framespeed));
+        }
+        else
+        {
+            clearTimeout(moveLeft);
+            document.getElementById('boom').style.visibility = 'visible';
+            document.getElementById('carFacingRight').style.visibility = 'hidden';
+            document.getElementById('carFacingLeft').style.visibility = 'hidden';
+        }
+    }
+
+    /* move right until boundary */
+    function right() {
+        var currentX = getX('carFacingRight');
+
+        if (currentX < maxright) {
+            currentX += step;
+
+            setX('carFacingRight', currentX);
+            moveRight = setTimeout(right, (1000 / framespeed));
+        }
+        else
+        {
+            clearTimeout(moveRight);
+        }
+    }
+
+//Move the cars
+function move(){
+    right();
+    left();
+}
+
+//Start the car crash
+function startGame(){
+       document.getElementById('startbtn').disabled = true;
+       document.getElementById('resetbtn').disabled = false;
+
+       setTimeout(function(){document.getElementById('timer').innerHTML = 'Starting the game in 5'},1000);
+       setTimeout(function(){document.getElementById('timer').innerHTML = 'Starting the game in 4'},2000);
+       setTimeout(function(){document.getElementById('timer').innerHTML = 'Starting the game in 3'},3000);
+       setTimeout(function(){document.getElementById('timer').innerHTML = 'Starting the game in 2'},4000);
+       setTimeout(function(){document.getElementById('timer').innerHTML = 'Starting the game in 1'},5000);
+       setTimeout(function(){document.getElementById('timer').innerHTML = 'Starting the game in 0'},6000);
+       setTimeout(function(){document.getElementById('timer').innerHTML = 'Go!'},7000);
+       setTimeout(move,7000);
+
+
+   }
+
+//Reset the car positions
+function resetGame(){
+        document.getElementById('startbtn').disabled = false;
+        document.getElementById('resetbtn').disabled = true;
+
+        document.getElementById('timer').innerHTML = "";
+
+        document.getElementById('carFacingRight').style.left = '200px';
+        document.getElementById('carFacingLeft').style.left = '1200px';
+        document.getElementById('boom').style.visibility = 'hidden';
+        document.getElementById('carFacingRight').style.visibility = 'visible';
+        document.getElementById('carFacingLeft').style.visibility = 'visible';
+    }
+
+    window.onload = function(){
+        document.getElementById("startbtn").onclick = startGame;
+        document.getElementById("resetbtn").onclick = resetGame;
+    };
+
+
+</script>
+<form id="carform" name="carform" action="index.html" method="Get">
+    <button type="button" id="startbtn" name="startbtn">Start</button>
+    <button type="button" id="resetbtn" name="resetbtn" disabled>Reset</button >
+    <br>
+    <div id="timer">&nbsp;</div>
+    <br>
+
+    <div id="carFacingRight">
+        <img src="CarFacingRight.jpg" id="carFacingRightjpg" alt="car facing right" >
+    </div>
+    <div id="boom">
+     <img src="boom.jpg" id="boomjpg" alt="boom" height="100" width="150">
+    </div>
+
+    <div id="carFacingLeft">
+        <img src="CarFacingLeft.jpg"  id="carFacingLeftjpg" alt="car facing left" >
+    </div>
+</form>
+</body>
+</html>
